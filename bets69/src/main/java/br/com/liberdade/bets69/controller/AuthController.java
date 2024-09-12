@@ -1,7 +1,7 @@
 package br.com.liberdade.bets69.controller;
 
 import br.com.liberdade.bets69.security.JwtTokenProvider;
-import br.com.liberdade.bets69.DTO.UserWithRoleRequest;
+import br.com.liberdade.bets69.dto.UserWithRoleRequest;
 import br.com.liberdade.bets69.model.User;
 import br.com.liberdade.bets69.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
