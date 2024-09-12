@@ -1,6 +1,7 @@
 package br.com.liberdade.bets69.controller;
 
 import br.com.liberdade.bets69.security.JwtTokenProvider;
+import br.com.liberdade.bets69.DTO.UserWithRoleRequest;
 import br.com.liberdade.bets69.model.User;
 import br.com.liberdade.bets69.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class AuthController {
     private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    private UserService userService; // Substituímos o UserRepository por UserService
+    private UserService userService; 
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody User loginRequest) {
@@ -40,8 +41,16 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
-        // Utilizamos o UserService para criar o usuário com a senha criptografada
+        //  cria um usuário com a senha criptografada
         userService.createUser(user);
         return ResponseEntity.ok("Usuário registrado com sucesso!");
     }
+    
+    @PostMapping("/register-with-role")
+    public ResponseEntity<?> registerUserWithRole(@RequestBody UserWithRoleRequest request) {
+        // Cria um novo usuário com uma role específica
+        userService.createUser(request.getUsername(), request.getPassword(), request.getRole());
+        return ResponseEntity.ok("Usuário registrado com sucesso com a role: " + request.getRole());
+    }
+    
 }
